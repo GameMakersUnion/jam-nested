@@ -14,6 +14,8 @@ public class Structure : MonoBehaviour {
     protected float height; //The height of the structure
     protected float x; //The x Position of the structure
     protected float y; //The y Positino of the structure
+    protected string thisClassName;
+    private Structure instance;
 
     enum hue { Red, Orange, Yellow, GreenLight, Green, BlueLight, Blue, Violet, Lavender}
 
@@ -48,18 +50,20 @@ public class Structure : MonoBehaviour {
      *  pos is (0,0) in bottom-left.
      */
 
-    public void Generate(GameObject goParent, Vector2 dimensions, Vector2 pos, float scale)
+    public Structure Generate(Structure goParent, Vector2 dimensions, Vector2 pos, float scale)
     {//Generate all the tiles to form the house
 
         //phase 0: initialize house dimensions
-        width = dimensions.x;
-        height = dimensions.y;
+        width = dimensions.x; //The number of tiles
+        height = dimensions.y;  //The number of tiles
+
+        instance = (Structure)Instantiate(goParent, pos, Quaternion.identity);
 
         GameObject walls = new GameObject("walls");
-        walls.transform.parent = goParent.transform;
+        walls.transform.parent = instance.transform;
 
         GameObject floors = new GameObject("floors");
-        floors.transform.parent = goParent.transform;
+        floors.transform.parent = instance.transform;
 
         //GameObject doors = new GameObject("doors");
         //doors.transform.parent = goParent.transform;
@@ -73,13 +77,13 @@ public class Structure : MonoBehaviour {
                 GameObject go;
                 if (yy == 0 || yy == height || xx == 0 || xx == width)
                 {
-                    go = (GameObject)Instantiate(Resources.Load("door"), new Vector3((xx + pos.x) * scale, (yy + pos.y) * scale, 0), Quaternion.identity);
+                    go = (GameObject)Instantiate(Resources.Load("tiles/door"), new Vector3((xx + pos.x) * scale, (yy + pos.y) * scale, 0), Quaternion.identity);
                     go.name = "wall("+xx+","+yy+")";
                     go.transform.parent = walls.transform;
                 }
                 else
                 {
-                    go = (GameObject)Instantiate(Resources.Load("floor"), new Vector3((xx + pos.x)*scale, (yy + pos.y)*scale, 0), Quaternion.identity);
+                    go = (GameObject)Instantiate(Resources.Load("tiles/floor"), new Vector3((xx + pos.x) * scale, (yy + pos.y) * scale, 0), Quaternion.identity);
                     go.name = "floor(" + xx + "," + yy + ")";
                     go.transform.parent = floors.transform;
                 }
@@ -102,6 +106,8 @@ public class Structure : MonoBehaviour {
 
         //phase 2: instantiate rooms within house boundaries
         //rooms = new Rectangle[dimensions.x, dimensions.y];
+
+        return instance;
 
     }
 

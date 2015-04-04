@@ -31,39 +31,39 @@ public class Rectangle : MonoBehaviour {
 	
 	}
 
-	public int SetWidth{
+    //public int SetWidth{
 		
-		get { return width;}
+    //    get { return width;}
 		
-		set { width = value;}  
+    //    set { width = value;}  
 		
-	}
-	public int SetHeight{
+    //}
+    //public int SetHeight{
 		
-		get { return height;}
+    //    get { return height;}
 		
-		set { height = value;}  
+    //    set { height = value;}  
 		
-	} 
-	public int SetX{
+    //} 
+    //public int SetX{
 		
-		get { return x;}
+    //    get { return x;}
 		
-		set { x = value;}  
+    //    set { x = value;}  
 		
-	}
-	public int SetY{
+    //}
+    //public int SetY{
 		
-		get { return y;}
+    //    get { return y;}
 		
-		set { y = value;}  
+    //    set { y = value;}  
 		
-	}  
-	public GameObject SetTile {
+    //}  
+    //public GameObject SetTile {
 
-		get { return tile; }
+    //    get { return tile; }
 
-		set { tile = value; }
+    //    set { tile = value; }
 
-	}
+    //}
 }

@@ -6,8 +6,6 @@ public class House : Structure {
 
 	private static int counter = 0;//The number of houses instantiated
 
-    private List<Room> rooms;//a house contains rooms
-
     private Structure stRef;
 
     //private Structure instance;
@@ -15,7 +13,6 @@ public class House : Structure {
 	// Use this for initialization
 	void Awake () {
         stRef = GameObject.Find("RoomGenerator").GetComponent<Structure>();
-	    rooms = new List<Room>();
         thisClassName = this.GetType().Name;    //House
 	}
 	
