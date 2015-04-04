@@ -3,29 +3,36 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Room : Rectangle {
-	private List<GameObject> rooms;
-	private Rectangle[,] rects;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
+    private static int counter = 0;//The number of rooms instantiated
+
+    private Structure stRef;
+
+    // Use this for initialization
+    void Awake()
+    {
+        stRef = GameObject.Find("RoomGenerator").GetComponent<Structure>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
 	
 	}
 
-	public void Generate(Vector2 dimensions){//Generate all the tiles to form the room
-		rects = new Rectangle[(int)dimensions.x, (int)dimensions.y]; //very bad
+    public void Generate(Vector2 dimensions, Vector2 pos)
+    {
+        if (stRef != null)
+        {
+            GameObject house = new GameObject("room" + counter++);
+            stRef.Generate(house, dimensions, pos);
+        }
+        else
+        {
+            Debug.LogWarning("Cannot instantiate house, couldn't find reference to RoomGenerator");
+        }
 
-		for (int x=0; x<width; x++) {
-			for (int y=0; y<height; y++) {
-				//rects[x,y] = (Rectangle)Instantiate ();
 
-			}
-		}
-	}
+    }
 
 
 }

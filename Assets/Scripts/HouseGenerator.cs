@@ -15,6 +15,7 @@ public class HouseGenerator : MonoBehaviour {
 	private  List<Room> rooms;
 
 	House houseRef;
+    Room roomRef;
 
 
 	// Use this for initialization
@@ -23,12 +24,13 @@ public class HouseGenerator : MonoBehaviour {
 
 
 		houseRef = GameObject.Find("RoomGenerator").GetComponent<House> ();
-		houseRef.Generate(new Vector2(5, 10), new Vector2(0,0) );
-		houseRef.Generate(new Vector2(10, 5), new Vector2(-20, -20) );
+		GameObject house0 = houseRef.Generate(new Vector2(5, 10), new Vector2(0,0) );
+        GameObject house1 = houseRef.Generate(new Vector2(10, 5), new Vector2(-20, -20));
 
 
-		//House home = new House ();
-			//House.Generate(new Vector2(10, 5), new Vector2(0,0) );
+
+	    //House home = new House ();
+	    //House.Generate(new Vector2(10, 5), new Vector2(0,0) );
 
 /*
 		rooms = new List<Room>();
@@ -45,7 +47,7 @@ public class HouseGenerator : MonoBehaviour {
 		}
 */
 
-	
+
 	}
 	
 	// Update is called once per frame
