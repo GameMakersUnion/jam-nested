@@ -25,10 +25,20 @@ public class HouseGenerator : MonoBehaviour {
 
 
 		houseRef = GameObject.Find("RoomGenerator").GetComponent<House> ();
+	    if (houseRef == null)
+	    {
+            Debug.LogWarning("Cannot generate houses. House script not attached to RoomGenerator");
+	        return;
+	    }
 		GameObject house0 = houseRef.Generate(new Vector2(10, 20), new Vector2(0,0) );
         GameObject house1 = houseRef.Generate(new Vector2(10, 5), new Vector2(-20, -20));
 
         roomRef = GameObject.Find("RoomGenerator").GetComponent<Room>();
+        if (roomRef == null)
+        {
+            Debug.LogWarning("Cannot generate rooms. Room script not attached to RoomGenerator");
+            return;
+        }
         GameObject room0a = roomRef.Generate(new Vector2(4, 4), new Vector2(1, 0));
         GameObject room0b = roomRef.Generate(new Vector2(4, 4), new Vector2(2, 6));
 
@@ -40,10 +50,8 @@ public class HouseGenerator : MonoBehaviour {
         //house inside room
 	    GameObject house2 = houseRef.Generate(new Vector2(6, 6), new Vector2(1, 1), HALF);
 
-        //this redundant stupdity is avoided
+        //god damn this redundant stupdity, it ought to be avoided
         house2.transform.position += new Vector3(house2.transform.position.x + 0, house2.transform.position.y + 0, house2.transform.position.z - 2);
-        //this is smarter
-	    Util.Add(house2.transform.position, new Vector3(0,0,-2));
 
 
 	    //House home = new House ();

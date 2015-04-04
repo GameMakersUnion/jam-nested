@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 /**
  * A structure is an abstraction that exists either level of house or room, 
@@ -13,9 +15,27 @@ public class Structure : MonoBehaviour {
     protected float x; //The x Position of the structure
     protected float y; //The y Positino of the structure
 
+    enum hue { Red, Orange, Yellow, GreenLight, Green, BlueLight, Blue, Violet, Lavender}
+
+    private Dictionary<hue, Color32> hues = new Dictionary<hue, Color32>()
+    {
+        {hue.Red, new Color(1, 0, 0, 1)},
+        {hue.Orange, new Color(1, 116f/225f, 0, 1)},
+        {hue.Yellow, new Color(1,1, 136/255,1)},
+        {hue.GreenLight, new Color(140f/255f, 1, 0, 1)},
+        {hue.Green, new Color(0,140f/255f, 0, 1)},
+        {hue.BlueLight, new Color(0,140f/255f, 1, 1)},
+        {hue.Blue, new Color(0,0,1,1)},
+        {hue.Violet, new Color(127f/255f, 0, 1, 1)},
+        {hue.Lavender, new Color(238f/255f, 130f/255f, 238f/255f, 1)}
+    };
+
+    private static int hackColorCounter = 4;
+
+
 	// Use this for initialization
 	void Start () {
-	
+
 	}
 	
 	// Update is called once per frame
@@ -53,7 +73,7 @@ public class Structure : MonoBehaviour {
                 GameObject go;
                 if (yy == 0 || yy == height || xx == 0 || xx == width)
                 {
-                    go = (GameObject)Instantiate(Resources.Load("wall"), new Vector3((xx + pos.x) * scale, (yy + pos.y) * scale, 0), Quaternion.identity);
+                    go = (GameObject)Instantiate(Resources.Load("door"), new Vector3((xx + pos.x) * scale, (yy + pos.y) * scale, 0), Quaternion.identity);
                     go.name = "wall("+xx+","+yy+")";
                     go.transform.parent = walls.transform;
                 }
@@ -63,7 +83,21 @@ public class Structure : MonoBehaviour {
                     go.name = "floor(" + xx + "," + yy + ")";
                     go.transform.parent = floors.transform;
                 }
+                //change scale 
+                go.transform.localScale = new Vector3(scale, scale, scale);
+
+                //change color
+                //go.GetComponent<SpriteRenderer>().color = hues[hue.Orange];
+                go.GetComponent<SpriteRenderer>().color = hues[(hue)hackColorCounter];
             }
+        }
+
+        //hack
+        int hackNumHues = Enum.GetNames(typeof(hue)).Length;
+        hackColorCounter++;
+        if (hackColorCounter > hackNumHues-1)
+        {
+            hackColorCounter = 0;
         }
 
         //phase 2: instantiate rooms within house boundaries
