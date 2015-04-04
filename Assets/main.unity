@@ -97,6 +97,8 @@ GameObject:
   - 4: {fileID: 435571960}
   - 114: {fileID: 435571959}
   - 114: {fileID: 435571961}
+  - 114: {fileID: 435571962}
+  - 114: {fileID: 435571963}
   m_Layer: 0
   m_Name: RoomGenerator
   m_TagString: Untagged
@@ -144,6 +146,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d1d8130626e6c0343895f53ce30a8add, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &435571962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 435571958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a2fcd71b49f171419d2bf24fdbda514, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &435571963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 435571958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5582da7a1e6267f4f9415b865babf948, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &753778353
