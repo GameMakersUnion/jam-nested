@@ -24,9 +24,14 @@ public class HouseGenerator : MonoBehaviour {
 
 
 		houseRef = GameObject.Find("RoomGenerator").GetComponent<House> ();
-		GameObject house0 = houseRef.Generate(new Vector2(5, 10), new Vector2(0,0) );
+		GameObject house0 = houseRef.Generate(new Vector2(10, 20), new Vector2(0,0) );
         GameObject house1 = houseRef.Generate(new Vector2(10, 5), new Vector2(-20, -20));
 
+        roomRef = GameObject.Find("RoomGenerator").GetComponent<Room>();
+        GameObject room0a = roomRef.Generate(new Vector2(4, 4), new Vector2(1, 0));
+        GameObject room0b = roomRef.Generate(new Vector2(4, 4), new Vector2(2, 6));
+        room0a.transform.parent = house0.transform;
+	    room0b.transform.parent = house0.transform;
 
 
 	    //House home = new House ();

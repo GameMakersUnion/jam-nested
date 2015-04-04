@@ -10,10 +10,15 @@ public class House : MonoBehaviour {
 
     private Structure stRef;
 
+    private string thisClassName;
+
+    private GameObject house;
+
 	// Use this for initialization
 	void Awake () {
         stRef = GameObject.Find("RoomGenerator").GetComponent<Structure>();
 	    rooms = new List<Room>();
+        thisClassName = this.GetType().Name;    //House
 	}
 	
 	// Update is called once per frame
@@ -25,17 +30,21 @@ public class House : MonoBehaviour {
     {
         if (stRef != null)
         {
-            GameObject house = new GameObject("house" + counter++); 
+            house = new GameObject(thisClassName + counter++);
             house.AddComponent<House>();
             stRef.Generate(house, dimensions, pos);
             return house;
         }
         else
         {
-            Debug.LogWarning("Cannot instantiate house, couldn't find reference to RoomGenerator");
+            Debug.LogWarning("Cannot instantiate " + thisClassName + ", couldn't find reference to RoomGenerator");
             return null;
         }
+        
+    }
 
+    public void Add(GameObject go)
+    {
         
     }
 

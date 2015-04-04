@@ -1,6 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/**
+ * A structure is an abstraction that exists either level of house or room, 
+ * since they're very similar.
+ */
+
 public class Structure : MonoBehaviour {
 
     protected int width; //The width of structure
@@ -26,6 +31,16 @@ public class Structure : MonoBehaviour {
         width = (int)dimensions.x;
         height = (int)dimensions.y;
 
+        GameObject walls = new GameObject("walls");
+        walls.transform.parent = goParent.transform;
+
+        GameObject floors = new GameObject("floors");
+        floors.transform.parent = goParent.transform;
+
+        //GameObject doors = new GameObject("doors");
+        //doors.transform.parent = goParent.transform;
+
+
         //phase 1: build walls, floor
         for (int xx = 0; xx <= width; xx++)
         {
@@ -35,12 +50,15 @@ public class Structure : MonoBehaviour {
                 if (yy == 0 || yy == height || xx == 0 || xx == width)
                 {
                     go = (GameObject)Instantiate(Resources.Load("wall"), new Vector3(xx + pos.x, yy + pos.y, 0), Quaternion.identity);
+                    go.name = "wall("+xx+","+yy+")";
+                    go.transform.parent = walls.transform;
                 }
                 else
                 {
                     go = (GameObject)Instantiate(Resources.Load("floor"), new Vector3(xx + pos.x, yy + pos.y, 0), Quaternion.identity);
+                    go.name = "floor(" + xx + "," + yy + ")";
+                    go.transform.parent = floors.transform;
                 }
-                go.transform.parent = goParent.transform;
             }
         }
 
