@@ -8,10 +8,10 @@ using System.Collections;
 
 public class Structure : MonoBehaviour {
 
-    protected int width; //The width of structure
-    protected int height; //The height of the structure
-    protected int x; //The x Position of the structure
-    protected int y; //The y Positino of the structure
+    protected float width; //The width of structure
+    protected float height; //The height of the structure
+    protected float x; //The x Position of the structure
+    protected float y; //The y Positino of the structure
 
 	// Use this for initialization
 	void Start () {
@@ -23,13 +23,17 @@ public class Structure : MonoBehaviour {
 	
 	}
 
+    /**
+     *  Scale affects dimensions but not pos. 
+     *  pos is (0,0) in bottom-left.
+     */
 
-    public void Generate(GameObject goParent, Vector2 dimensions, Vector2 pos)
+    public void Generate(GameObject goParent, Vector2 dimensions, Vector2 pos, float scale)
     {//Generate all the tiles to form the house
 
         //phase 0: initialize house dimensions
-        width = (int)dimensions.x;
-        height = (int)dimensions.y;
+        width = dimensions.x;
+        height = dimensions.y;
 
         GameObject walls = new GameObject("walls");
         walls.transform.parent = goParent.transform;
@@ -49,13 +53,13 @@ public class Structure : MonoBehaviour {
                 GameObject go;
                 if (yy == 0 || yy == height || xx == 0 || xx == width)
                 {
-                    go = (GameObject)Instantiate(Resources.Load("wall"), new Vector3(xx + pos.x, yy + pos.y, 0), Quaternion.identity);
+                    go = (GameObject)Instantiate(Resources.Load("wall"), new Vector3((xx + pos.x) * scale, (yy + pos.y) * scale, 0), Quaternion.identity);
                     go.name = "wall("+xx+","+yy+")";
                     go.transform.parent = walls.transform;
                 }
                 else
                 {
-                    go = (GameObject)Instantiate(Resources.Load("floor"), new Vector3(xx + pos.x, yy + pos.y, 0), Quaternion.identity);
+                    go = (GameObject)Instantiate(Resources.Load("floor"), new Vector3((xx + pos.x)*scale, (yy + pos.y)*scale, 0), Quaternion.identity);
                     go.name = "floor(" + xx + "," + yy + ")";
                     go.transform.parent = floors.transform;
                 }

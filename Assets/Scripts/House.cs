@@ -26,13 +26,20 @@ public class House : MonoBehaviour {
 	
 	}
 
+    //no scale provided, defaults to 1
     public GameObject Generate(Vector2 dimensions, Vector2 pos)
+    {
+        return Generate(dimensions, pos, 1);
+    }
+
+    //scale provided, typically will be 0.5f
+    public GameObject Generate(Vector2 dimensions, Vector2 pos, float scale)
     {
         if (stRef != null)
         {
             house = new GameObject(thisClassName + counter++);
             house.AddComponent<House>();
-            stRef.Generate(house, dimensions, pos);
+            stRef.Generate(house, dimensions, pos, scale);
             return house;
         }
         else

@@ -17,6 +17,7 @@ public class HouseGenerator : MonoBehaviour {
 	House houseRef;
     Room roomRef;
 
+    public const float HALF = 0.5f;
 
 	// Use this for initialization
 	void Start () {
@@ -30,8 +31,19 @@ public class HouseGenerator : MonoBehaviour {
         roomRef = GameObject.Find("RoomGenerator").GetComponent<Room>();
         GameObject room0a = roomRef.Generate(new Vector2(4, 4), new Vector2(1, 0));
         GameObject room0b = roomRef.Generate(new Vector2(4, 4), new Vector2(2, 6));
-        room0a.transform.parent = house0.transform;
-	    room0b.transform.parent = house0.transform;
+
+	    GameObject rooms0 = new GameObject("rooms");
+        rooms0.transform.parent = house0.transform;
+        room0a.transform.parent = rooms0.transform;
+        room0b.transform.parent = rooms0.transform;
+
+        //house inside room
+	    GameObject house2 = houseRef.Generate(new Vector2(6, 6), new Vector2(1, 1), HALF);
+
+        //this redundant stupdity is avoided
+        house2.transform.position += new Vector3(house2.transform.position.x + 0, house2.transform.position.y + 0, house2.transform.position.z - 2);
+        //this is smarter
+	    Util.Add(house2.transform.position, new Vector3(0,0,-2));
 
 
 	    //House home = new House ();

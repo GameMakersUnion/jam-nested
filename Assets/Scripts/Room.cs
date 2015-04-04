@@ -43,7 +43,7 @@ public class Room : Rectangle {
         if (stRef != null)
         {
             GameObject room = new GameObject(thisClassName + counter++);
-            stRef.Generate(room, dimensions, pos);
+            stRef.Generate(room, dimensions, pos, 1);
             room.transform.position += new Vector3(0,0,-1); //hack
             return room;
         }
