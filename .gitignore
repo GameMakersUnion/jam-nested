@@ -19,3 +19,10 @@
 
 # Unity3D Generated File On Crash Reports
 sysinfo.txt
+
+# Windows image file caches
+Thumbs.db
+
+# Visual Studio Tool
+Assets/UnityVS/
+Assets/UnityVS.meta
