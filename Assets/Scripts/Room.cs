@@ -2,13 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Room : Rectangle {
+public class Room : Structure{
 
     private static int counter = 0;//The number of rooms instantiated
 
     private Structure stRef;
-
-    private string thisClassName;
 
     // Use this for initialization
     void Awake()
@@ -22,7 +20,7 @@ public class Room : Rectangle {
 	
 	}
 
-    public GameObject Generate(Vector2 dimensions, Vector2 pos)
+    public Structure Generate(Vector2 dimensions, Vector2 pos)
     {
 
         //negatives not allowed
@@ -42,10 +40,12 @@ public class Room : Rectangle {
 
         if (stRef != null)
         {
-            GameObject room = new GameObject(thisClassName + counter++);
-            stRef.Generate(room, dimensions, pos, 1);
-            room.transform.position += new Vector3(0,0,-1); //hack
-            return room;
+            //GameObject room = new GameObject(thisClassName + counter++);
+            Room room = Resources.Load<Room>("structures/room");
+            Room roomInstance = (Room)stRef.Generate(room, dimensions, pos, 1);
+            roomInstance.transform.name = thisClassName + counter++;
+            roomInstance.transform.position += new Vector3(0, 0, -1); //hack
+            return roomInstance;
         }
         else
         {

@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class House : MonoBehaviour {
+public class House : Structure {
 
 	private static int counter = 0;//The number of houses instantiated
 
@@ -10,9 +10,7 @@ public class House : MonoBehaviour {
 
     private Structure stRef;
 
-    private string thisClassName;
-
-    private GameObject house;
+    //private Structure instance;
 
 	// Use this for initialization
 	void Awake () {
@@ -27,20 +25,24 @@ public class House : MonoBehaviour {
 	}
 
     //no scale provided, defaults to 1
-    public GameObject Generate(Vector2 dimensions, Vector2 pos)
+    public Structure Generate(Vector2 dimensions, Vector2 pos)
     {
         return Generate(dimensions, pos, 1);
     }
 
     //scale provided, typically will be 0.5f
-    public GameObject Generate(Vector2 dimensions, Vector2 pos, float scale)
+    public Structure Generate(Vector2 dimensions, Vector2 pos, float scale)
     {
         if (stRef != null)
         {
-            house = new GameObject(thisClassName + counter++);
-            house.AddComponent<House>();
-            stRef.Generate(house, dimensions, pos, scale);
-            return house;
+            //GameObject house = new GameObject(thisClassName + counter++);
+            //house.AddComponent<House>();
+
+            House house = Resources.Load<House>("structures/house");
+
+            House houseInstance = (House)stRef.Generate(house, dimensions, pos, scale);
+            houseInstance.transform.name = thisClassName + counter++;
+            return houseInstance;
         }
         else
         {

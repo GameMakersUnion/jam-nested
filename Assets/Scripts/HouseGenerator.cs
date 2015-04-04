@@ -30,8 +30,8 @@ public class HouseGenerator : MonoBehaviour {
             Debug.LogWarning("Cannot generate houses. House script not attached to RoomGenerator");
 	        return;
 	    }
-		GameObject house0 = houseRef.Generate(new Vector2(10, 20), new Vector2(0,0) );
-        GameObject house1 = houseRef.Generate(new Vector2(10, 5), new Vector2(-20, -20));
+		Structure house0 = houseRef.Generate(new Vector2(10, 20), new Vector2(0,0) );
+        Structure house1 = houseRef.Generate(new Vector2(10, 5), new Vector2(-20, -20));
 
         roomRef = GameObject.Find("RoomGenerator").GetComponent<Room>();
         if (roomRef == null)
@@ -39,8 +39,8 @@ public class HouseGenerator : MonoBehaviour {
             Debug.LogWarning("Cannot generate rooms. Room script not attached to RoomGenerator");
             return;
         }
-        GameObject room0a = roomRef.Generate(new Vector2(4, 4), new Vector2(1, 0));
-        GameObject room0b = roomRef.Generate(new Vector2(4, 4), new Vector2(2, 6));
+        Structure room0a = roomRef.Generate(new Vector2(4, 4), new Vector2(1, 0));
+        Structure room0b = roomRef.Generate(new Vector2(4, 4), new Vector2(2, 6));
 
 	    GameObject rooms0 = new GameObject("rooms");
         rooms0.transform.parent = house0.transform;
@@ -48,7 +48,7 @@ public class HouseGenerator : MonoBehaviour {
         room0b.transform.parent = rooms0.transform;
 
         //house inside room
-	    GameObject house2 = houseRef.Generate(new Vector2(6, 6), new Vector2(1, 1), HALF);
+	    Structure house2 = houseRef.Generate(new Vector2(6, 6), new Vector2(1, 1), HALF);
 
         //god damn this redundant stupdity, it ought to be avoided
         house2.transform.position += new Vector3(house2.transform.position.x + 0, house2.transform.position.y + 0, house2.transform.position.z - 2);
